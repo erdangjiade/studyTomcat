@@ -24,15 +24,16 @@ public class HttpConnector implements Runnable{
 		}
 		
 		while(!stopped){
-			
+			Socket s = null;
 			try {
-				Socket s = ss.accept();
+				s = ss.accept();
 			} catch (IOException e) {
 				e.printStackTrace();
 				continue;
 			}
 			
-			
+			HttpProcessor hp = new HttpProcessor(this);
+			hp.process(s);
 			
 		}
 		
